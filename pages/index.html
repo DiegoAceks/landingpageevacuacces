@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EvacuAcces: evacuación accesible y guiada</title>
+<meta name="description" content="Demostración interactiva de EvacuAcces: guiado dinámico de evacuación para personas con movilidad reducida, adultos mayores y brigadistas.">
+<link rel="icon" href="../favicon.ico">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header><div class="bar"><span class="logo">EvacuAcces</span>
+<nav aria-label="Secciones"><a href="#perfil">Perfil</a><a href="#alerta">Alerta</a><a href="#guiado">Guiado</a><a href="#ayuda">Ayuda humana</a><a href="#panel">Panel de brigadistas</a><a href="#edificio">Edificio</a></nav></div></header>
+<main id="contenido">
+<div class="hero"><h1>Evacuar con seguridad, sin quedarte atrás</h1>
+<p>Demostración interactiva de EvacuAcces. Todo es una simulación: no se envían datos a ningún servidor. Cada control indica la historia de usuario (HU) que cumple.</p></div>
+
+<section id="perfil" aria-labelledby="t-perfil"><h2 id="t-perfil">Tu perfil de accesibilidad</h2>
+<p class="lead">Dinos cómo te desplazas para que la ruta se adapte a ti.</p>
+<div class="grid">
+<form id="f-perfil" class="card" novalidate><h3>Registro <small class="hu">HU01</small><small class="hu">HU08</small></h3>
+<label for="nom">Nombre</label><input type="text" id="nom" autocomplete="name" aria-describedby="m-perfil">
+<fieldset><legend>¿Cómo te desplazas?</legend>
+<label class="opt"><input type="radio" name="mov" value="sr"> Silla de ruedas</label>
+<label class="opt"><input type="radio" name="mov" value="mu"> Muletas</label>
+<label class="opt"><input type="radio" name="mov" value="ba"> Bastón</label>
+<label class="opt"><input type="radio" name="mov" value="am"> Adulto mayor</label></fieldset>
+<label class="chk"><input type="checkbox" id="cons"> <span>Acepto que mis datos de movilidad se usen solo durante una emergencia activa.</span></label>
+<details><summary>Aviso de privacidad</summary><p>Tus datos de movilidad y salud se protegen según la Ley N.º 29733 y solo los ve la brigada durante una emergencia activa.</p></details>
+<button class="b-ok" type="submit">Guardar perfil</button><p class="msg" id="m-perfil" role="status"></p></form>
+<form id="f-brig" class="card" novalidate><h3>Acceso de brigadistas <small class="hu">HU03</small></h3>
+<label for="cod">Código institucional (demostración: BRIG-2026)</label><input type="text" id="cod" autocomplete="off" aria-describedby="m-brig">
+<button class="b-sec" type="submit">Activar rol de brigadista</button><p class="msg" id="m-brig" role="status"></p></form>
+</div></section>
+
+<section id="alerta" aria-labelledby="t-alerta"><h2 id="t-alerta">Alerta de emergencia</h2>
+<p class="lead">Simula un siniestro y observa la pantalla única de emergencia.</p>
+<div class="grid"><div class="card"><h3>Simulador <small class="hu">HU09</small><small class="hu">HU10</small></h3>
+<button class="b-red" id="b-sismo" type="button">Simular sismo</button>
+<label for="piso">Piso del foco de incendio</label><select id="piso"><option>1</option><option>2</option><option>3</option><option>4</option><option selected>5</option></select>
+<button class="b-red" id="b-fuego" type="button">Simular incendio</button></div>
+<div class="screen" id="pantalla" role="region" aria-labelledby="p-tit" tabindex="-1"><h3 id="p-tit">Sin alerta activa</h3><p class="big" id="p-txt">Pulsa un simulador.</p>
+<p id="p-cuenta" aria-live="polite"></p>
+<div hidden id="p-acc"><span class="tag">Pantalla única <small class="hu">HU11</small></span><br><button class="b-ok" id="b-ruta" type="button">Ver ruta sugerida</button><button class="b-red" id="b-aux" type="button">Solicitar auxilio</button></div></div></div>
+<div class="card" style="margin-top:16px"><h3>Gravedad por zonas <small class="hu">HU14</small></h3><div class="zones" id="gravedad" aria-live="polite"></div></div></section>
+
+<section id="guiado" aria-labelledby="t-guiado"><h2 id="t-guiado">Guiado de evacuación</h2>
+<p class="lead">Una instrucción a la vez, con ruta sin escaleras según tu perfil.</p>
+<div class="grid"><div class="card"><h3>Tipo de guiado <small class="hu">HU24</small></h3>
+<label for="tipo">Selecciona</label><select id="tipo"><option value="est">Estándar</option><option value="mu">Muletas o bastón</option><option value="sr">Silla de ruedas</option></select>
+<label class="chk"><input type="checkbox" id="vib"> <span>Vibración y voz automáticas <small class="hu">HU06</small></span></label>
+<button class="b-ok" id="b-ini" type="button">Iniciar guiado</button></div>
+<div class="screen" role="region" aria-labelledby="g-tit"><h3 id="g-tit">Instrucción actual <small class="hu">HU22</small></h3><p class="big" id="g-ins" aria-live="assertive">Inicia el guiado.</p>
+<p id="g-met"></p><p id="g-pos"></p><p class="msg" id="g-av" role="status"></p>
+<button class="b-sec" id="b-sig" type="button" disabled>Siguiente instrucción</button><button class="b-sec" id="b-rep" type="button" disabled>Escuchar de nuevo</button><button class="b-amb" id="b-blq" type="button" disabled>Simular bloqueo</button></div></div>
+<div class="card" style="margin-top:16px"><h3>Plano y zona de refugio <small class="hu">HU21</small></h3><div class="zones" id="plano-g"></div></div>
+<p class="lead">Ruta accesible: HU17. Recálculo: HU18. Distancia y tiempo: HU19. Posición por balizas: HU20. Lectura en voz alta: HU13.</p></section>
+
+<section id="ayuda" aria-labelledby="t-ayuda"><h2 id="t-ayuda">Ayuda humana</h2>
+<p class="lead">Pide que una persona te asista y confirma cuando estés a salvo.</p>
+<div class="grid"><div class="card"><h3>Solicitud <small class="hu">HU25</small><small class="hu">HU26</small></h3>
+<button class="b-red" id="b-pedir" type="button">Solicitar asistencia humana</button><p id="a-est" role="status" aria-live="polite">Sin solicitud.</p>
+<h3>Respuestas rápidas <small class="hu">HU27</small></h3><div id="rap"><button class="b-sec" type="button">Estoy bien</button><button class="b-sec" type="button">Hay humo</button><button class="b-sec" type="button">No puedo moverme</button></div><p id="a-log" role="status" aria-live="polite"></p></div>
+<form id="f-med" class="card" novalidate><h3>Necesidades de asistencia <small class="hu">HU29</small></h3>
+<label for="med">¿Qué ayuda necesitas?</label><textarea id="med" rows="3" aria-describedby="m-med"></textarea>
+<label class="chk"><input type="checkbox" id="cmed"> <span>Autorizo compartirlo solo con el brigadista asignado.</span></label>
+<button class="b-sec" type="submit">Enviar</button><p class="msg" id="m-med" role="status"></p>
+<h3>Confirmación <small class="hu">HU15</small></h3><button class="b-ok" id="b-salvo" type="button">Estoy a salvo</button>
+<div id="conf" hidden><p>¿Confirmas que estás a salvo?</p><button class="b-ok" id="c-si" type="button">Sí, confirmo</button><button class="b-sec" id="c-no" type="button">No</button></div></form></div></section>
+
+<section id="panel" aria-labelledby="t-panel"><h2 id="t-panel">Panel de brigadistas</h2>
+<p class="lead">Requiere activar el rol de brigadista (HU03) en la sección Perfil.</p>
+<div class="grid"><div class="card"><h3>Censo dinámico <small class="hu">HU36</small></h3><div class="cnt" aria-live="polite"><div><b id="n-ev">0</b>Evacuados</div><div><b id="n-pe">0</b>Pendientes</div></div>
+<h3 style="margin-top:14px">Solicitudes por riesgo <small class="hu">HU34</small><small class="hu">HU32</small></h3><ul class="l" id="lista"></ul><p class="msg" id="m-panel" role="status"></p></div>
+<div class="card"><h3>Mapa de calor <small class="hu">HU33</small><small class="hu">HU35</small></h3>
+<div role="group" aria-label="Filtro"><button class="b-sec" type="button" data-f="all" aria-pressed="true">Todos</button><button class="b-sec" type="button" data-f="PMR" aria-pressed="false">PMR</button><button class="b-sec" type="button" data-f="AM" aria-pressed="false">Adultos mayores</button></div>
+<div class="zones" id="calor"></div>
+<h3>Vía bloqueada <small class="hu">HU37</small></h3><label for="zb">Zona</label><select id="zb"><option value="1">Zona 1</option><option value="2">Zona 2</option><option value="3">Zona 3</option><option value="4">Zona 4</option><option value="5">Zona 5</option></select>
+<button class="b-amb" id="b-bloq" type="button">Marcar vía bloqueada</button></div></div></section>
+
+<section id="edificio" aria-labelledby="t-edi"><h2 id="t-edi">Edificio y planos</h2>
+<p class="lead">Elige el edificio, el piso y registra puntos seguros.</p>
+<div class="grid"><div class="card"><h3>Edificio <small class="hu">HU07</small><small class="hu">HU41</small></h3>
+<label for="edi">Edificio (simula el QR de ingreso)</label><select id="edi"><option value="">Selecciona</option><option value="5">Clínica (demo, 5 pisos)</option><option value="3">Campus (demo, 3 pisos)</option></select>
+<label for="pl">Plano por piso</label><select id="pl" disabled><option>Elige un edificio</option></select><p class="msg ok" id="m-edi" role="status"></p><div class="zones" id="plano-e"></div></div>
+<form id="f-ref" class="card" novalidate><h3>Refugios y puntos de encuentro <small class="hu">HU44</small></h3>
+<label for="rn">Nombre</label><input type="text" id="rn" aria-describedby="m-ref"><label for="rt">Tipo</label><select id="rt"><option>Zona de refugio</option><option>Punto de encuentro</option></select>
+<button class="b-ok" type="submit">Agregar</button><p class="msg" id="m-ref" role="status"></p><ul class="l" id="l-ref"></ul></form></div></section>
+</main>
+<footer>EvacuAcces · Proyecto de HCI for UX Design (1ASI0784) · UPC · Simulación académica</footer>
+<script src="../js/main.js"></script>
+</body></html>
