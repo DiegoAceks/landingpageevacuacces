@@ -30,3 +30,6 @@ footer{border-top:1px solid var(--line);padding:20px;text-align:center;color:var
 @media (max-width:767px){.bar{padding:8px 12px}main{padding:0 12px 30px}.zones{gap:4px}.z{font-size:11px;min-height:70px}button{width:100%}.cnt div{flex:1}}
 @media (min-width:768px) and (max-width:1023px){.zones{gap:6px}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.kicker{color:#6EE7B7;font-weight:700;margin:0 0 8px}.cta{display:inline-flex;align-items:center;min-height:48px;padding:0 22px;border-radius:12px;background:var(--ok);color:#0F172A;font-weight:700;text-decoration:none;margin:6px 10px 6px 0}.cta.sec{background:var(--card);color:var(--txt);border:2px solid var(--line)}
+.q{color:var(--mut);font-style:italic;font-size:14px}.steps{padding-left:22px}.steps li{margin:10px 0;max-width:70ch}
+@media (max-width:767px){.cta{width:100%;justify-content:center}}
